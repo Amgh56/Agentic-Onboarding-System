@@ -7,20 +7,19 @@
 .DS_Store
 .idea/
 .vscode/
-
 # Python
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 .pytest_cache/
-
 # Database and uploads
 *.db
 *.sqlite3
 backend/uploads/*
 !backend/uploads/.gitkeep
-
 # Node
 node_modules/
 dist/
+.next/
+next-env.d.ts
