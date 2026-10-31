@@ -19,7 +19,7 @@ export function CandidateProfilePage() {
   const { candidateId } = useParams<{ candidateId: string }>();
   const { profile, busy, error, decide, simulateReply, download } = useCandidateProfile(Number(candidateId));
 
-  if (!profile) return <p className="muted">{t("common.loading")}</p>;
+  if (!profile) return error ? <p className="field-error">{error}</p> : <p className="muted">{t("common.loading")}</p>;
   const { candidate, job, plan } = profile;
 
   return (

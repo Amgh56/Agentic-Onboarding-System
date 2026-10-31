@@ -19,7 +19,7 @@ export function useCandidates(jobId: number) {
   const [error, setError] = useState("");
 
   const load = useCallback(() => {
-    candidatesService.listCandidates(jobId).then(setCandidates);
+    candidatesService.listCandidates(jobId).then(setCandidates).catch(() => {}); // the next poll tries again
   }, [jobId]);
 
   useEffect(() => {
@@ -60,27 +60,31 @@ export function useCandidateProfile(candidateId: number) {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [loadError, setLoadError] = useState("");
 
   const load = useCallback(async () => {
-    const candidate = await candidatesService.getCandidate(candidateId);
-    const [job, plan, events, documents, accounts, approvals, email] = await Promise.all([
-      getJob(candidate.job_id),
-      getPlan(candidate.job_id),
-      candidatesService.listEvents(candidateId),
-      candidatesService.listDocuments(candidateId),
-      candidatesService.listAccounts(candidateId),
-      listApprovals({ candidate_id: candidateId, status: "pending" }),
-      getSettings(),
-    ]);
-    setProfile({ candidate, job, plan, events, documents, accounts, approvals, testMode: email?.provider === "mock" });
+    try {
+      const candidate = await candidatesService.getCandidate(candidateId);
+      const [job, plan, events, documents, accounts, approvals, email] = await Promise.all([
+        getJob(candidate.job_id),
+        getPlan(candidate.job_id),
+        candidatesService.listEvents(candidateId),
+        candidatesService.listDocuments(candidateId),
+        candidatesService.listAccounts(candidateId),
+        listApprovals({ candidate_id: candidateId, status: "pending" }),
+        getSettings(),
+      ]);
+      setProfile({ candidate, job, plan, events, documents, accounts, approvals, testMode: email?.provider === "mock" });
+      setLoadError("");
+    } catch (failure) {
+      setLoadError(message(failure));
+    }
   }, [candidateId]);
 
   useEffect(() => {
     load();
   }, [load]);
-  usePolling(() => {
-    if (!busy) load();
-  }, 5000);
+  usePolling(load, busy ? 2000 : 5000); // refresh faster while the agent runs, so each step shows as it happens
 
   /** The agent runs while the request is open, so this can take a while. */
   async function work(action: () => Promise<unknown>) {
@@ -98,7 +102,7 @@ export function useCandidateProfile(candidateId: number) {
   return {
     profile,
     busy,
-    error,
+    error: error || (profile ? "" : loadError), // a failed refresh is ignored once the page has data
     decide: (approval: Approval, approve: boolean, note: string) => work(() => decideApproval(approval.id, approve, note)),
     simulateReply: (files: File[]) => work(() => candidatesService.simulateReply(profile!.candidate, files)),
     download: candidatesService.downloadDocument,

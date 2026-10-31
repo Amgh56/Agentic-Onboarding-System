@@ -58,6 +58,16 @@ def test_steps_are_ticked_off_and_completion_needs_all_of_them(client, company_a
     assert candidate.step_status["step-2"]["outcome"] == "skipped"
 
 
+def test_step_review_is_told_the_candidates_role(client, company_a, session, fake_llm, monkeypatch):
+    monkeypatch.setattr(verifier, "ENABLED", True)
+    cid, _, candidate = setup(client, company_a, session, fake_llm)
+    candidate.role = "Backend engineer"
+
+    fake_llm.say('{"approved": true, "reason": "Fine."}')
+    call(session, cid, candidate, "complete_steps", steps=[{"step_id": "step-1", "outcome": "done"}])
+    assert "Candidate role: Backend engineer" in fake_llm.text_calls[-1]["prompt"]
+
+
 def test_completion_needs_every_department_told_or_skipped_with_a_reason(client, company_a, session, fake_llm):
     cid, _, candidate = setup(client, company_a, session, fake_llm)
     call(session, cid, candidate, "complete_steps", steps=[{"step_id": "step-1", "outcome": "done"}, {"step_id": "step-2", "outcome": "done"}])

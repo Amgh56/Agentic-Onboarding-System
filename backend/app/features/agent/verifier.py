@@ -27,7 +27,8 @@ REVIEW_SYSTEM = """You are the verifier for an onboarding agent. Before a risky 
 Judge only this one action. Never refuse it because other actions are still to come, and never ask for
 several actions to be bundled together: one account per action is normal.
 Approve it unless it clearly breaks one of these:
-- the company's procedure, for this candidate's job and role. HR's decisions settle any doubt about the role;
+- the company's procedure, for this candidate's job and role. HR's decisions settle any doubt about the role.
+  Match the role by what the person does when the title clearly means one of the procedure's roles: a backend engineer is a developer;
 - the order of the plan: it must belong to the current step or an earlier one, never a later step;
 - the documents rule: no account until the requested documents are valid;
 - data minimisation: an email to a department shares only what that department needs (no salary details to IT,
@@ -97,7 +98,8 @@ Do not ask for more proof than the facts can give, and do not invent requirement
 Judge a step only by its own action, not by what later steps will do. A step that sends or asks for something
 is finished once it was sent; what comes back is checked in the next step.
 Refuse only when something the step needs is clearly missing or wrong. The agent's word alone is not a fact.
-HR's decisions settle any doubt about the role or an unclear case. A document marked valid was already read, as the file itself (signatures, every page, the name), by two
+HR's decisions settle any doubt about the role or an unclear case. Match the candidate's role by what the person
+does when the title clearly means one of the procedure's roles: a backend engineer is a developer. A document marked valid was already read, as the file itself (signatures, every page, the name), by two
 independent reviewers. You cannot open files: judge their written findings, and accept them when they say
 the document is signed, complete and in the right name.
 If you refuse, say in one sentence what is missing and what to do, so the agent can fix it.
@@ -125,6 +127,8 @@ def review_step(session: Session, company_id: int, candidate, number: int, step:
     prompt = f"""Step {number}: {step["title"]}
 Details: {step["details"]}
 The agent says: {outcome}. Its reason: {reason}
+
+Candidate role: {candidate.role or "not given"}
 
 Facts so far:
 - Accounts: {"; ".join(f"{a.system_key} ({a.address}), groups: {', '.join(a.groups) or 'none'}, {a.status}" for a in accounts) or "none"}

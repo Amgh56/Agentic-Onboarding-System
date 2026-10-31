@@ -106,7 +106,7 @@ export function CandidateDialog({ onCreate, onClose }: Props) {
         <div className="modal-actions">
           <button type="button" className="button button-light" onClick={onClose}>{t("common.cancel")}</button>
           <button className="button" disabled={saving}>
-            {t("candidates.addN")} ({applicants.length})
+            {t("candidates.addN")}
           </button>
         </div>
       </form>
