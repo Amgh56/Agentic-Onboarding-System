@@ -3,5 +3,6 @@ export type JobDocument = {
   job_id: number;
   filename: string;
   content_type: string;
+  instructions: string;
   created_at: string;
 };

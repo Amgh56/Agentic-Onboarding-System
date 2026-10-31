@@ -1,5 +1,7 @@
+import re
+
 from fastapi import HTTPException
-from sqlmodel import Session, select
+from sqlmodel import Session, func, select, update
 
 from app.core.events import Event, log_event
 from app.features.candidates.csv_import import parse_candidates
@@ -25,7 +27,7 @@ def add_candidates(
     for candidate in candidates:
         log_event(
             session, company_id, candidate.id, "hr", "Applicant added",
-            f"Added to {job.title}, first step: {candidate.stage}.",
+            f"Added to {job.title}.",
         )
     session.commit()
     for candidate in candidates:
@@ -74,14 +76,81 @@ def job_counts(session: Session, company_id: int) -> list[JobCounts]:
     candidates = session.exec(select(Candidate).where(Candidate.company_id == company_id)).all()
     counts = []
     for job in jobs_service.list_jobs(session, company_id):
-        stages = [c.stage for c in candidates if c.job_id == job.id]
-        completed = stages.count(job.stages[-1])
+        statuses = [c.status for c in candidates if c.job_id == job.id]
+        completed = statuses.count("completed")
         counts.append(
-            JobCounts(
-                job_id=job.id,
-                applicants=len(stages),
-                in_progress=len(stages) - completed,
-                completed=completed,
-            )
+            JobCounts(job_id=job.id, applicants=len(statuses), in_progress=len(statuses) - completed, completed=completed)
         )
     return counts
+
+
+def set_status(session: Session, company_id: int, candidate_id: int, status: str) -> Candidate:
+    candidate = get_candidate(session, company_id, candidate_id)
+    candidate.status = status
+    session.add(candidate)
+    session.commit()
+    session.refresh(candidate)
+    return candidate
+
+
+def list_open(session: Session, company_id: int) -> list[Candidate]:
+    """Candidates HR has started and who are not finished yet."""
+    query = select(Candidate).where(
+        Candidate.company_id == company_id, Candidate.status.in_(["invited", "in_progress"])
+    )
+    return session.exec(query.order_by(Candidate.id)).all()
+
+
+def set_documents_due(session: Session, company_id: int, candidate_id: int, due_at) -> Candidate:
+    candidate = get_candidate(session, company_id, candidate_id)
+    candidate.documents_due_at = due_at
+    session.add(candidate)
+    session.commit()
+    session.refresh(candidate)
+    return candidate
+
+
+def reference_code(candidate_id: int) -> str:
+    return f"ONB-{candidate_id}"
+
+
+def match_sender(session: Session, company_id: int, from_address: str, subject: str) -> Candidate | None:
+    """Find who sent a reply: the reference code in the subject first, then the sender address."""
+    found = re.search(r"ONB-(\d+)", subject)
+    if found:
+        candidate = session.get(Candidate, int(found.group(1)))
+        if candidate and candidate.company_id == company_id:
+            return candidate
+    query = select(Candidate).where(
+        Candidate.company_id == company_id, func.lower(Candidate.email) == from_address.strip().lower()
+    )
+    return session.exec(query.order_by(Candidate.id.desc())).first()
+
+
+def set_step_outcomes(session: Session, company_id: int, candidate_id: int, outcomes: dict) -> Candidate:
+    candidate = get_candidate(session, company_id, candidate_id)
+    candidate.step_status = {**candidate.step_status, **outcomes}
+    session.add(candidate)
+    session.commit()
+    session.refresh(candidate)
+    return candidate
+
+
+def list_waiting(session: Session, company_id: int, job_id: int) -> list[Candidate]:
+    """Applicants of this job whose onboarding has not started yet."""
+    query = select(Candidate).where(
+        Candidate.company_id == company_id, Candidate.job_id == job_id, Candidate.status == "draft"
+    )
+    return session.exec(query.order_by(Candidate.id)).all()
+
+
+def claim_for_start(session: Session, company_id: int, candidate_id: int) -> bool:
+    """Move a candidate out of "draft" exactly once, so two starts can never run for the same person."""
+    result = session.execute(
+        update(Candidate)
+        .where(Candidate.id == candidate_id, Candidate.company_id == company_id, Candidate.status == "draft")
+        .values(status="invited")
+    )
+    session.commit()
+    session.expire_all()
+    return result.rowcount == 1

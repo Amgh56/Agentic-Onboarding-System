@@ -12,8 +12,12 @@ export function DetailsCard({ candidate }: { candidate: Candidate }) {
         <h3>{t("candidates.details")}</h3>
       </header>
       <dl className="details">
-        <dt>{t("candidates.nameAr")}</dt>
-        <dd dir="rtl">{candidate.full_name_ar}</dd>
+        {candidate.role && (
+          <>
+            <dt>{t("candidates.role")}</dt>
+            <dd>{candidate.role}</dd>
+          </>
+        )}
         <dt>{t("candidates.email")}</dt>
         <dd>{candidate.email}</dd>
         <dt>{t("candidates.phone")}</dt>

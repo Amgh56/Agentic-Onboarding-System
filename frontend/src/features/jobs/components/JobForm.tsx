@@ -2,12 +2,10 @@
 
 import { useState, type FormEvent } from "react";
 import { useI18n } from "@/shared/lib/i18n";
-import type { JobForm as JobFormValues, JobStatus } from "../jobs.model";
+import type { JobForm as JobFormValues } from "../jobs.model";
 import { validateJob } from "../jobs.schema";
-import { DescriptionField } from "./DescriptionField";
 
-const empty: JobFormValues = { title: "", overview: "", description: "", status: "draft" };
-const statuses: JobStatus[] = ["draft", "onboarding", "closed"];
+const empty: JobFormValues = { title: "", overview: "", description: "", status: "onboarding" };
 
 type Props = {
   onCreate: (values: JobFormValues) => Promise<void>;
@@ -43,15 +41,6 @@ export function JobForm({ onCreate, onClose }: Props) {
         <label className="field">
           <span className="field-label">{t("jobs.overview")}</span>
           <input value={values.overview} onChange={(e) => setValues({ ...values, overview: e.target.value })} />
-        </label>
-        <DescriptionField value={values.description} onChange={(description) => setValues({ ...values, description })} />
-        <label className="field">
-          <span className="field-label">{t("jobs.status")}</span>
-          <select value={values.status} onChange={(e) => setValues({ ...values, status: e.target.value as JobStatus })}>
-            {statuses.map((status) => (
-              <option key={status} value={status}>{t(`status.${status}`)}</option>
-            ))}
-          </select>
         </label>
         <div className="modal-actions">
           <button type="button" className="button button-light" onClick={onClose}>{t("common.cancel")}</button>

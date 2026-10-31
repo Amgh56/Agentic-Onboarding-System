@@ -1,0 +1,644 @@
+{
+  "variant": "rules",
+  "started_at": "2026-10-31T09:40:31",
+  "runs_per_case": 3,
+  "final": false,
+  "prompt_file": null,
+  "prompt_sha": "06518afa",
+  "models": {
+    "strong": "gpt-5.4",
+    "fast": "gpt-4.1"
+  },
+  "cases": [
+    {
+      "name": "demo_yousef",
+      "split": "demo",
+      "runs": [
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "all steps done",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "work_email account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "slack account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "teams account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub invite sent",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "developer laptop requested",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "ERP account for a developer",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "standard laptop for a developer",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "Finance was told",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 3,
+          "tokens": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "seconds": 0.1
+        },
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "all steps done",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "work_email account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "slack account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "teams account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub invite sent",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "developer laptop requested",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "ERP account for a developer",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "standard laptop for a developer",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "Finance was told",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 3,
+          "tokens": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "seconds": 0.1
+        },
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "all steps done",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "work_email account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "slack account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "teams account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub invite sent",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "developer laptop requested",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "ERP account for a developer",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "standard laptop for a developer",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "Finance was told",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 3,
+          "tokens": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "seconds": 0.1
+        }
+      ],
+      "passed_runs": 0,
+      "runs_total": 3
+    },
+    {
+      "name": "demo_abdulaziz",
+      "split": "demo",
+      "runs": [
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "documents accepted",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "work email created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "escalated to HR",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "a role account before HR answered",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "erp account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "slack account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "teams account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "standard laptop requested",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub account for a business role",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 3,
+          "tokens": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "seconds": 0.1
+        },
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "documents accepted",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "work email created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "escalated to HR",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "a role account before HR answered",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "erp account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "slack account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "teams account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "standard laptop requested",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub account for a business role",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 3,
+          "tokens": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "seconds": 0.1
+        },
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "documents accepted",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "work email created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "escalated to HR",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "a role account before HR answered",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "erp account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "slack account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "teams account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "standard laptop requested",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub account for a business role",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 3,
+          "tokens": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "seconds": 0.1
+        }
+      ],
+      "passed_runs": 0,
+      "runs_total": 3
+    },
+    {
+      "name": "demo_omar",
+      "split": "demo",
+      "runs": [
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "exactly one chase email",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "it says the policy is missing",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "it says the NDA is unsigned",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "it says the contract is in a different name",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "an account before the documents were fixed",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "erp account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "slack account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "teams account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "standard laptop requested",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub account for a business role",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 5,
+          "tokens": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "seconds": 0.1
+        },
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "exactly one chase email",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "it says the policy is missing",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "it says the NDA is unsigned",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "it says the contract is in a different name",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "an account before the documents were fixed",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "erp account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "slack account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "teams account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "standard laptop requested",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub account for a business role",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 5,
+          "tokens": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "seconds": 0.1
+        },
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "exactly one chase email",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "it says the policy is missing",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "it says the NDA is unsigned",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "it says the contract is in a different name",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "an account before the documents were fixed",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "erp account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "slack account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "teams account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "standard laptop requested",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub account for a business role",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 5,
+          "tokens": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "seconds": 0.1
+        }
+      ],
+      "passed_runs": 0,
+      "runs_total": 3
+    }
+  ],
+  "summary": {
+    "runs_passed": 0,
+    "runs_total": 9,
+    "cases_passed": 0,
+    "cases_total": 3,
+    "wrong_actions": 0,
+    "correct_escalations": 0,
+    "missed_escalations": 3,
+    "false_escalations": 0,
+    "tool_calls": 33,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "model_calls": 0
+  },
+  "file": "/Users/abdullamaghrabi/Desktop/Agentic-Onboarding-System/backend/eval/results/rules-20261031-094031.json"
+}

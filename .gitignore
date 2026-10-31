@@ -23,3 +23,22 @@ node_modules/
 dist/
 .next/
 next-env.d.ts
+*.tsbuildinfo
+
+
+# Demo files (signed and blank documents used for the demo)
+demo_files/
+demo_files.zip
+
+
+# Caches and build output
+*.tsbuildinfo
+.eslintcache
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+build/
+out/
+*.log

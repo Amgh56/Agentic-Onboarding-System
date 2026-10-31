@@ -1,0 +1,178 @@
+{
+  "variant": "full",
+  "started_at": "2026-10-31T10:11:35",
+  "runs_per_case": 1,
+  "final": false,
+  "prompt_file": null,
+  "prompt_sha": "625de910",
+  "models": {
+    "strong": "gpt-5.4",
+    "fast": "gpt-5.4-mini"
+  },
+  "cases": [
+    {
+      "name": "demo_abdulaziz",
+      "split": "demo",
+      "runs": [
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "documents accepted",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "work email created",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "escalated to HR",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "a role account before HR answered",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "erp account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "slack account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "teams account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "standard laptop requested",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub account for a business role",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 10,
+          "tokens": {
+            "calls": 22,
+            "input_tokens": 48648,
+            "output_tokens": 1512
+          },
+          "seconds": 38.6
+        }
+      ],
+      "passed_runs": 0,
+      "runs_total": 1
+    },
+    {
+      "name": "demo_omar",
+      "split": "demo",
+      "runs": [
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "exactly one chase email",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "it says the policy is missing",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "it says the NDA is unsigned",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "it says the contract is in a different name",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "an account before the documents were fixed",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "erp account created",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "slack account created",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "teams account created",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "standard laptop requested",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub account for a business role",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": true,
+          "tool_calls": 18,
+          "tokens": {
+            "calls": 36,
+            "input_tokens": 85092,
+            "output_tokens": 2485
+          },
+          "seconds": 58.3
+        }
+      ],
+      "passed_runs": 0,
+      "runs_total": 1
+    }
+  ],
+  "summary": {
+    "runs_passed": 0,
+    "runs_total": 2,
+    "cases_passed": 0,
+    "cases_total": 2,
+    "wrong_actions": 0,
+    "correct_escalations": 0,
+    "missed_escalations": 1,
+    "false_escalations": 1,
+    "tool_calls": 28,
+    "input_tokens": 133740,
+    "output_tokens": 3997,
+    "model_calls": 58
+  },
+  "file": "/Users/abdullamaghrabi/Desktop/Agentic-Onboarding-System/backend/eval/results/full-20261031-101135.json"
+}

@@ -59,11 +59,14 @@ def test_csv_with_bad_row_imports_nothing(client, company_a):
     assert client.get(f"/jobs/{job_id}/candidates", headers=company_a).json() == []
 
 
-def test_counts(client, company_a):
-    job_id = make_job(client, company_a, stages=["New", "Done"])
+def test_counts(client, company_a, session):
+    from app.features.candidates import service as candidates_service
+    from tests.helpers import company_id
+
+    job_id = make_job(client, company_a)
     first = client.post(f"/jobs/{job_id}/candidates", json=APPLICANT, headers=company_a).json()
     client.post(f"/jobs/{job_id}/candidates", json=APPLICANT, headers=company_a)
-    client.put(f"/candidates/{first['id']}/stage", json={"stage": "Done"}, headers=company_a)
+    candidates_service.set_status(session, company_id(client, company_a), first["id"], "completed")
 
     counts = client.get("/candidates/counts", headers=company_a).json()
     assert counts == [{"job_id": job_id, "applicants": 2, "in_progress": 1, "completed": 1}]
@@ -96,3 +99,23 @@ def test_other_company_cannot_read_profile_or_activity(client, company_a, compan
     candidate = client.post(f"/jobs/{job_id}/candidates", json=APPLICANT, headers=company_a).json()
     assert client.get(f"/candidates/{candidate['id']}", headers=company_b).status_code == 404
     assert client.get(f"/candidates/{candidate['id']}/events", headers=company_b).status_code == 404
+
+
+def test_role_is_optional_and_status_starts_as_draft(client, company_a):
+    job_id = make_job(client, company_a)
+    plain = client.post(f"/jobs/{job_id}/candidates", json=APPLICANT, headers=company_a).json()
+    assert plain["role"] == ""
+    assert plain["status"] == "draft"
+
+    with_role = client.post(
+        f"/jobs/{job_id}/candidates", json={**APPLICANT, "role": "Backend developer"}, headers=company_a
+    ).json()
+    assert with_role["role"] == "Backend developer"
+
+
+def test_csv_role_column_is_optional(client, company_a):
+    job_id = make_job(client, company_a)
+    with_role = CSV.replace("date_of_birth\n", "date_of_birth,role\n").replace("1998-01-02", "1998-01-02,Designer").replace("1992-07-30", "1992-07-30,")
+    files = {"file": ("applicants.csv", with_role.encode("utf-8"), "text/csv")}
+    response = client.post(f"/jobs/{job_id}/candidates/import", files=files, headers=company_a)
+    assert [c["role"] for c in response.json()] == ["Designer", ""]

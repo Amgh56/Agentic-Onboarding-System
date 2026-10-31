@@ -2,35 +2,33 @@
 
 import { useState } from "react";
 import { useI18n } from "@/shared/lib/i18n";
+import { PenIcon } from "@/shared/components/icons";
 import { DocumentsEditor } from "@/features/documents/components/DocumentsEditor";
 import type { Job, JobSetup } from "../jobs.model";
-import { DescriptionField } from "./DescriptionField";
 
 export function SetupForm({ job, onSave }: { job: Job; onSave: (setup: JobSetup) => Promise<void> }) {
   const { t } = useI18n();
-  const [description, setDescription] = useState(job.description);
   const [procedure, setProcedure] = useState(job.procedure);
-  const [saved, setSaved] = useState(false);
+  const [saved, setSaved] = useState(job.procedure.trim() !== "");
 
   async function save() {
-    await onSave({ description, procedure });
+    await onSave({ procedure, start_mode: job.start_mode });
     setSaved(true);
-  }
-
-  function edit<T>(setter: (value: T) => void) {
-    return (value: T) => {
-      setter(value);
-      setSaved(false);
-    };
   }
 
   return (
     <div className="card setup">
-      <DescriptionField value={description} rows={8} onChange={edit(setDescription)} />
       <label className="field">
         <span className="field-label">{t("jobs.procedure")}</span>
         <span className="muted hint">{t("jobs.procedure.hint")}</span>
-        <textarea rows={8} value={procedure} onChange={(e) => edit(setProcedure)(e.target.value)} />
+        <textarea
+          rows={10}
+          className={saved ? "locked" : ""}
+          readOnly={saved}
+          tabIndex={saved ? -1 : 0}
+          value={procedure}
+          onChange={(e) => setProcedure(e.target.value)}
+        />
       </label>
       <div className="field">
         <span className="field-label">{t("jobs.documents")}</span>
@@ -38,8 +36,14 @@ export function SetupForm({ job, onSave }: { job: Job; onSave: (setup: JobSetup)
         <DocumentsEditor jobId={job.id} />
       </div>
       <div className="setup-actions">
-        <button className="button" onClick={save}>{t("common.save")}</button>
-        {saved && <span className="muted">{t("jobs.saved")}</span>}
+        {saved ? (
+          <button className="button button-light" onClick={() => setSaved(false)}>
+            <PenIcon />
+            {t("common.edit")}
+          </button>
+        ) : (
+          <button className="button" onClick={save}>{t("common.save")}</button>
+        )}
       </div>
     </div>
   );

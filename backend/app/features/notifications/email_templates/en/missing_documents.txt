@@ -1,0 +1,9 @@
+Hello {name_en},
+
+Thank you for what you sent. To finish your onboarding we still need:
+
+{documents}
+{problems_en}
+{how_en}
+
+Your reference is {reference}.

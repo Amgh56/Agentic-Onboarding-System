@@ -1,0 +1,9 @@
+Hello {name_en},
+
+Welcome! To start your onboarding, please reply to this email with the following documents attached:
+
+{documents}
+
+Files attached to this email are listed above with what to do with them.
+
+Please keep the reference {reference} in the subject when you reply.

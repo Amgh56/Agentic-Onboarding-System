@@ -1,0 +1,11 @@
+Hello {name_en},
+
+Welcome! To start your onboarding, please upload the following documents using your personal link:
+
+{documents}
+
+Files attached to this email are listed above with what to do with them.
+
+Upload here: {link}
+
+Your reference is {reference}.

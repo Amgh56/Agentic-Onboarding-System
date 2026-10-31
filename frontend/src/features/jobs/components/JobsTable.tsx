@@ -5,16 +5,14 @@ import type { JobCounts } from "@/features/candidates/candidates.model";
 import { useI18n } from "@/shared/lib/i18n";
 import { relativeTime } from "@/shared/lib/time";
 import { ChevronRightIcon } from "@/shared/components/icons";
-import type { Job, JobStatus } from "../jobs.model";
-import { StatusSelect } from "./StatusSelect";
+import type { Job } from "../jobs.model";
 
 type Props = {
   jobs: Job[];
   counts: Record<number, JobCounts>;
-  onStatusChange: (job: Job, status: JobStatus) => void;
 };
 
-export function JobsTable({ jobs, counts, onStatusChange }: Props) {
+export function JobsTable({ jobs, counts }: Props) {
   const { t, locale } = useI18n();
   const router = useRouter();
 
@@ -28,7 +26,6 @@ export function JobsTable({ jobs, counts, onStatusChange }: Props) {
             <th>{t("jobs.col.applicants")}</th>
             <th>{t("jobs.col.inProgress")}</th>
             <th>{t("jobs.col.completed")}</th>
-            <th>{t("jobs.col.status")}</th>
             <th>{t("jobs.col.activity")}</th>
             <th />
           </tr>
@@ -44,9 +41,6 @@ export function JobsTable({ jobs, counts, onStatusChange }: Props) {
               <td>{counts[job.id]?.applicants ?? 0}</td>
               <td>{counts[job.id]?.in_progress ?? 0}</td>
               <td>{counts[job.id]?.completed ?? 0}</td>
-              <td>
-                <StatusSelect status={job.status} onChange={(status) => onStatusChange(job, status)} />
-              </td>
               <td className="muted">{relativeTime(job.created_at, locale)}</td>
               <td className="muted">
                 <ChevronRightIcon />

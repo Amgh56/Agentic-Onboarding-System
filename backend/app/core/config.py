@@ -18,6 +18,7 @@ REQUIRED = [
     "MODEL_STRONG",
     "MODEL_FAST",
     "OPENAI_API_KEY",
+    "APP_BASE_URL",
 ]
 
 
@@ -30,6 +31,7 @@ class Settings:
     model_strong: str
     model_fast: str
     openai_api_key: str
+    app_base_url: str
 
 
 def load_settings(env: Mapping[str, str]) -> Settings:
@@ -48,6 +50,7 @@ def load_settings(env: Mapping[str, str]) -> Settings:
         model_strong=env["MODEL_STRONG"],
         model_fast=env["MODEL_FAST"],
         openai_api_key=env["OPENAI_API_KEY"],
+        app_base_url=env["APP_BASE_URL"].rstrip("/"),
     )
 
 

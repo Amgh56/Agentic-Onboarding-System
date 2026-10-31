@@ -1,12 +1,14 @@
-export type JobStatus = "draft" | "onboarding" | "closed";
+export type JobStatus = "onboarding" | "closed";
+
+export type StartMode = "auto" | "notify" | "ask_first";
 
 export type Job = {
   id: number;
-  template_id: number | null;
   title: string;
   overview: string;
   description: string;
   status: JobStatus;
+  start_mode: StartMode;
   procedure: string;
   stages: string[];
   created_at: string;
@@ -21,4 +23,4 @@ export type JobForm = {
 
 export type JobUpdate = Omit<Job, "id" | "created_at">;
 
-export type JobSetup = Pick<Job, "description" | "procedure">;
+export type JobSetup = Pick<Job, "procedure" | "start_mode">;

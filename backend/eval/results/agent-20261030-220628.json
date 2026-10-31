@@ -1,0 +1,604 @@
+{
+  "variant": "agent",
+  "started_at": "2026-10-30T22:06:28",
+  "runs_per_case": 3,
+  "final": false,
+  "prompt_file": null,
+  "prompt_sha": "9a83ffa9",
+  "models": {
+    "strong": "gpt-5.4",
+    "fast": "gpt-4.1"
+  },
+  "cases": [
+    {
+      "name": "business_valid",
+      "split": "dev",
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "label": "work email created",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "ERP account created",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "welcome email lists the new work email",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "payroll was told",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub account for a business role",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "IT ticket for a business role",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "IT department was emailed",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 8,
+          "tokens": {
+            "calls": 11,
+            "input_tokens": 20918,
+            "output_tokens": 858
+          },
+          "seconds": 23.1
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "label": "work email created",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "ERP account created",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "welcome email lists the new work email",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "payroll was told",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub account for a business role",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "IT ticket for a business role",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "IT department was emailed",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 8,
+          "tokens": {
+            "calls": 11,
+            "input_tokens": 20802,
+            "output_tokens": 847
+          },
+          "seconds": 23.3
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "label": "work email created",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "ERP account created",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "welcome email lists the new work email",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "payroll was told",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub account for a business role",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "IT ticket for a business role",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "IT department was emailed",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 8,
+          "tokens": {
+            "calls": 11,
+            "input_tokens": 20814,
+            "output_tokens": 844
+          },
+          "seconds": 21.6
+        }
+      ],
+      "passed_runs": 3,
+      "runs_total": 3
+    },
+    {
+      "name": "developer_valid",
+      "split": "dev",
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "label": "work email created",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub invite sent",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "laptop ticket opened",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "IT department was emailed",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "welcome email lists the new work email",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "ERP account for a developer",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "equipment details sent to payroll",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 10,
+          "tokens": {
+            "calls": 11,
+            "input_tokens": 21450,
+            "output_tokens": 1021
+          },
+          "seconds": 24.4
+        },
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "work email created",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub invite sent",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "laptop ticket opened",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "IT department was emailed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "welcome email lists the new work email",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "ERP account for a developer",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "equipment details sent to payroll",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 9,
+          "tokens": {
+            "calls": 11,
+            "input_tokens": 21464,
+            "output_tokens": 957
+          },
+          "seconds": 21.8
+        },
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "work email created",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub invite sent",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "laptop ticket opened",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "IT department was emailed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "welcome email lists the new work email",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "ERP account for a developer",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "equipment details sent to payroll",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 9,
+          "tokens": {
+            "calls": 11,
+            "input_tokens": 21510,
+            "output_tokens": 961
+          },
+          "seconds": 22.4
+        }
+      ],
+      "passed_runs": 1,
+      "runs_total": 3
+    },
+    {
+      "name": "expired_document",
+      "split": "dev",
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "label": "document rejected",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "candidate told it is expired",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "any account created",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "onboarding completed",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "IT ticket opened",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 4,
+          "tokens": {
+            "calls": 8,
+            "input_tokens": 12873,
+            "output_tokens": 609
+          },
+          "seconds": 16.6
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "label": "document rejected",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "candidate told it is expired",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "any account created",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "onboarding completed",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "IT ticket opened",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 4,
+          "tokens": {
+            "calls": 8,
+            "input_tokens": 12803,
+            "output_tokens": 589
+          },
+          "seconds": 15.8
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "label": "document rejected",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "candidate told it is expired",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "any account created",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "onboarding completed",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "IT ticket opened",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 4,
+          "tokens": {
+            "calls": 8,
+            "input_tokens": 12698,
+            "output_tokens": 568
+          },
+          "seconds": 15.8
+        }
+      ],
+      "passed_runs": 3,
+      "runs_total": 3
+    },
+    {
+      "name": "missing_past_deadline",
+      "split": "dev",
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "label": "reminder sent to the candidate",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "escalated to HR",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "any account created",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "onboarding completed",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": true,
+          "tool_calls": 3,
+          "tokens": {
+            "calls": 7,
+            "input_tokens": 12389,
+            "output_tokens": 570
+          },
+          "seconds": 15.1
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "label": "reminder sent to the candidate",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "escalated to HR",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "any account created",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "onboarding completed",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": true,
+          "tool_calls": 3,
+          "tokens": {
+            "calls": 7,
+            "input_tokens": 12403,
+            "output_tokens": 562
+          },
+          "seconds": 14.7
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "label": "reminder sent to the candidate",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "escalated to HR",
+              "ok": true,
+              "forbidden": false
+            },
+            {
+              "label": "any account created",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "onboarding completed",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": true,
+          "tool_calls": 3,
+          "tokens": {
+            "calls": 7,
+            "input_tokens": 12404,
+            "output_tokens": 547
+          },
+          "seconds": 14.8
+        }
+      ],
+      "passed_runs": 3,
+      "runs_total": 3
+    }
+  ],
+  "summary": {
+    "runs_passed": 10,
+    "runs_total": 12,
+    "cases_passed": 3,
+    "cases_total": 4,
+    "wrong_actions": 0,
+    "correct_escalations": 3,
+    "missed_escalations": 0,
+    "false_escalations": 0,
+    "tool_calls": 73,
+    "input_tokens": 202528,
+    "output_tokens": 8933,
+    "model_calls": 111
+  },
+  "file": "/Users/abdullamaghrabi/Desktop/Agentic-Onboarding-System/backend/eval/results/agent-20261030-220628.json"
+}

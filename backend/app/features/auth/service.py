@@ -7,6 +7,8 @@ from app.core.security import create_token, hash_password, read_token, verify_pa
 from app.features.auth.model import User
 from app.features.auth.schema import LoginRequest, SignupRequest, TokenResponse
 from app.features.companies import service as companies_service
+from app.features.departments import service as departments_service
+from app.features.systems import service as systems_service
 
 bearer = HTTPBearer()
 
@@ -15,6 +17,8 @@ def signup(session: Session, data: SignupRequest) -> TokenResponse:
     if session.exec(select(User).where(User.email == data.email)).first():
         raise HTTPException(400, "Email already registered")
     company = companies_service.create_company(session, data.company_name)
+    domain = systems_service.seed_defaults(session, company.id, company.name)
+    departments_service.ensure_defaults(session, company.id, domain)
     user = User(
         company_id=company.id,
         full_name=data.full_name,

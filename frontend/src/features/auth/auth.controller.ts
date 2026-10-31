@@ -32,7 +32,7 @@ function useAuthForm<T extends Record<string, string>>(
     setServerError("");
     try {
       await submit(values);
-      router.replace("/overview");
+      router.replace("/jobs");
     } catch (error) {
       setServerError(error instanceof Error ? error.message : "Something went wrong");
       setSubmitting(false);

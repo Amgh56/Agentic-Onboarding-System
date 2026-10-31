@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { getCounts } from "@/features/candidates/candidates.service";
 import type { JobCounts } from "@/features/candidates/candidates.model";
-import type { Job, JobForm, JobSetup, JobStatus } from "./jobs.model";
+import type { Job, JobForm, JobSetup } from "./jobs.model";
 import * as jobsService from "./jobs.service";
 
 export function useJobs() {
@@ -25,12 +25,7 @@ export function useJobs() {
     setJobs([...jobs, job]);
   }
 
-  async function changeStatus(job: Job, status: JobStatus) {
-    const updated = await jobsService.updateJob(job, { status });
-    setJobs(jobs.map((item) => (item.id === updated.id ? updated : item)));
-  }
-
-  return { jobs, counts, loading, createJob, changeStatus };
+  return { jobs, counts, loading, createJob };
 }
 
 export function useJob(id: number) {
@@ -40,13 +35,9 @@ export function useJob(id: number) {
     jobsService.getJob(id).then(setJob);
   }, [id]);
 
-  async function changeStatus(status: JobStatus) {
-    if (job) setJob(await jobsService.updateJob(job, { status }));
-  }
-
   async function saveSetup(setup: JobSetup) {
     if (job) setJob(await jobsService.updateJob(job, setup));
   }
 
-  return { job, changeStatus, saveSetup };
+  return { job, saveSetup };
 }

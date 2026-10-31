@@ -1,4 +1,5 @@
 from datetime import date, datetime
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -9,6 +10,7 @@ class CandidateCreate(BaseModel):
     phone: str = Field(min_length=1)
     email: str = Field(min_length=1)
     date_of_birth: date
+    role: str = ""
 
 
 class CandidateRead(BaseModel):
@@ -19,7 +21,11 @@ class CandidateRead(BaseModel):
     phone: str
     email: str
     date_of_birth: date
+    role: str
+    avatar_url: str
+    status: Literal["draft", "invited", "in_progress", "completed"]
     stage: str
+    step_status: dict
     created_at: datetime
 
 

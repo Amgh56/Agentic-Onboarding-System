@@ -10,7 +10,7 @@ import { JobsTable } from "./components/JobsTable";
 
 export function JobsPage() {
   const { t } = useI18n();
-  const { jobs, counts, loading, createJob, changeStatus } = useJobs();
+  const { jobs, counts, loading, createJob } = useJobs();
   const [creating, setCreating] = useState(false);
 
   if (loading) return <p className="muted">{t("common.loading")}</p>;
@@ -29,7 +29,7 @@ export function JobsPage() {
       {jobs.length === 0 ? (
         <JobsEmpty onCreate={() => setCreating(true)} />
       ) : (
-        <JobsTable jobs={jobs} counts={counts} onStatusChange={changeStatus} />
+        <JobsTable jobs={jobs} counts={counts} />
       )}
       {creating && <JobForm onCreate={createJob} onClose={() => setCreating(false)} />}
     </>

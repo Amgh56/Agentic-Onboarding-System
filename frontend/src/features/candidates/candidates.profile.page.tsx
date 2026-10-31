@@ -2,25 +2,25 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { ApprovalCard } from "@/features/approvals/components/ApprovalCard";
 import { useI18n } from "@/shared/lib/i18n";
 import { ChevronLeftIcon } from "@/shared/components/icons";
 import { useCandidateProfile } from "./candidates.controller";
-import { getProgress } from "./candidates.model";
+import { AccountsCard } from "./components/AccountsCard";
 import { ActivityLog } from "./components/ActivityLog";
+import { Avatar } from "./components/Avatar";
 import { DetailsCard } from "./components/DetailsCard";
+import { DocumentsCard } from "./components/DocumentsCard";
+import { StatusChip } from "./components/StatusChip";
 import { Timeline } from "./components/Timeline";
 
-const initials = (name: string) =>
-  name.split(" ").filter(Boolean).slice(0, 2).map((word) => word[0].toUpperCase()).join("");
-
 export function CandidateProfilePage() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { candidateId } = useParams<{ candidateId: string }>();
-  const { candidate, job, events, move } = useCandidateProfile(Number(candidateId));
+  const { profile, busy, error, decide, simulateReply, download } = useCandidateProfile(Number(candidateId));
 
-  if (!candidate || !job) return <p className="muted">{t("common.loading")}</p>;
-
-  const progress = getProgress(job.stages, candidate.stage);
+  if (!profile) return <p className="muted">{t("common.loading")}</p>;
+  const { candidate, job, plan } = profile;
 
   return (
     <>
@@ -29,22 +29,49 @@ export function CandidateProfilePage() {
         {job.title}
       </Link>
       <div className="profile-header">
-        <span className="avatar avatar-large">{initials(candidate.full_name_en)}</span>
-        <div>
+        <Avatar candidate={candidate} large />
+        <div className="profile-main">
           <div className="profile-name-row">
-            <h2 className="page-title">{candidate.full_name_en}</h2>
-            <span className={progress.completed ? "chip chip-onboarding" : "chip chip-pending"}>
-              {progress.completed ? t("candidates.completed") : job.stages[progress.index]}
-            </span>
+            <h2 className="page-title">{locale === "ar" ? candidate.full_name_ar : candidate.full_name_en}</h2>
+            <StatusChip status={candidate.status} />
           </div>
           <p className="muted">{candidate.email} · <span dir="ltr">{candidate.phone}</span></p>
         </div>
       </div>
+      {candidate.status === "draft" && !plan?.approved && <p className="notice">{t("candidates.waitingForProcedure")}</p>}
+      {busy && <p className="banner">{t("candidates.working")}</p>}
+      {error && <p className="field-error">{error}</p>}
+
       <div className="profile-grid">
-        <Timeline stages={job.stages} stage={candidate.stage} onMove={move} />
         <div className="profile-side">
+          <Timeline steps={plan?.approved ? plan.steps : null} candidate={candidate} />
+          <AccountsCard accounts={profile.accounts} />
+        </div>
+        <div className="profile-side">
+          {profile.approvals.length > 0 && (
+            <section className="card attention">
+              <header className="card-header"><h3>{t("approvals.title")}</h3></header>
+              <div className="approval-list">
+                {profile.approvals.map((approval) => (
+                  <ApprovalCard
+                    key={approval.id}
+                    approval={approval}
+                    busy={busy}
+                    onDecide={(approve, note) => decide(approval, approve, note)}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+          <DocumentsCard
+            documents={profile.documents}
+            testMode={profile.testMode && candidate.status !== "draft" && candidate.status !== "completed"}
+            busy={busy}
+            onDownload={download}
+            onSimulate={simulateReply}
+          />
+          <ActivityLog events={profile.events} />
           <DetailsCard candidate={candidate} />
-          <ActivityLog events={events} />
         </div>
       </div>
     </>

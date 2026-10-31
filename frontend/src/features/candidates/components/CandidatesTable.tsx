@@ -3,16 +3,18 @@
 import { useRouter } from "next/navigation";
 import { useI18n } from "@/shared/lib/i18n";
 import { ChevronRightIcon } from "@/shared/components/icons";
-import { getProgress, type Candidate } from "../candidates.model";
+import { stepsDone, type Candidate } from "../candidates.model";
+import { Avatar } from "./Avatar";
+import { StatusChip } from "./StatusChip";
 
 type Props = {
   jobId: number;
-  stages: string[];
+  stepIds: string[];
   candidates: Candidate[];
 };
 
-export function CandidatesTable({ jobId, stages, candidates }: Props) {
-  const { t } = useI18n();
+export function CandidatesTable({ jobId, stepIds, candidates }: Props) {
+  const { t, locale } = useI18n();
   const router = useRouter();
 
   return (
@@ -22,41 +24,35 @@ export function CandidatesTable({ jobId, stages, candidates }: Props) {
           <tr>
             <th>{t("candidates.col.name")}</th>
             <th>{t("candidates.email")}</th>
-            <th>{t("candidates.phone")}</th>
-            <th>{t("candidates.col.stage")}</th>
+            <th>{t("candidates.col.status")}</th>
             <th>{t("candidates.col.progress")}</th>
             <th />
           </tr>
         </thead>
         <tbody>
-          {candidates.map((candidate) => {
-            const progress = getProgress(stages, candidate.stage);
-            return (
-              <tr
-                key={candidate.id}
-                className="clickable"
-                onClick={() => router.push(`/jobs/${jobId}/candidates/${candidate.id}`)}
-              >
-                <td>
-                  <div className="job-title">{candidate.full_name_en}</div>
-                  <div className="job-sub" dir="rtl">{candidate.full_name_ar}</div>
-                </td>
-                <td>{candidate.email}</td>
-                <td dir="ltr">{candidate.phone}</td>
-                <td>
-                  <span className={progress.completed ? "chip chip-onboarding" : "chip chip-pending"}>
-                    {stages[progress.index]}
-                  </span>
-                </td>
-                <td className="muted">
-                  {progress.done} {t("candidates.of")} {progress.total} {t("candidates.steps")}
-                </td>
-                <td className="muted">
-                  <ChevronRightIcon />
-                </td>
-              </tr>
-            );
-          })}
+          {candidates.map((candidate) => (
+            <tr key={candidate.id} className="clickable" onClick={() => router.push(`/jobs/${jobId}/candidates/${candidate.id}`)}>
+              <td>
+                <div className="applicant">
+                  <Avatar candidate={candidate} />
+                  <div>
+                    <div className="job-title">{locale === "ar" ? candidate.full_name_ar : candidate.full_name_en}</div>
+                    <div className="job-sub">{candidate.role}</div>
+                  </div>
+                </div>
+              </td>
+              <td>{candidate.email}</td>
+              <td>
+                <StatusChip status={candidate.status} />
+              </td>
+              <td className="muted">
+                {stepIds.length > 0 && `${stepsDone(candidate, stepIds)} ${t("candidates.of")} ${stepIds.length} ${t("candidates.steps")}`}
+              </td>
+              <td className="muted">
+                <ChevronRightIcon />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

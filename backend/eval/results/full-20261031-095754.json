@@ -1,0 +1,101 @@
+{
+  "variant": "full",
+  "started_at": "2026-10-31T09:57:54",
+  "runs_per_case": 1,
+  "final": false,
+  "prompt_file": null,
+  "prompt_sha": "06518afa",
+  "models": {
+    "strong": "gpt-5.4",
+    "fast": "gpt-4.1"
+  },
+  "cases": [
+    {
+      "name": "demo_yousef",
+      "split": "demo",
+      "runs": [
+        {
+          "passed": false,
+          "checks": [
+            {
+              "label": "all steps done",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "onboarding completed",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "work_email account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "slack account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "teams account created",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "GitHub invite sent",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "developer laptop requested",
+              "ok": false,
+              "forbidden": false
+            },
+            {
+              "label": "ERP account for a developer",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "standard laptop for a developer",
+              "ok": true,
+              "forbidden": true
+            },
+            {
+              "label": "Finance was told",
+              "ok": true,
+              "forbidden": true
+            }
+          ],
+          "wrong_actions": 0,
+          "escalated": false,
+          "tool_calls": 9,
+          "tokens": {
+            "calls": 19,
+            "input_tokens": 39400,
+            "output_tokens": 1430
+          },
+          "seconds": 33.9
+        }
+      ],
+      "passed_runs": 0,
+      "runs_total": 1
+    }
+  ],
+  "summary": {
+    "runs_passed": 0,
+    "runs_total": 1,
+    "cases_passed": 0,
+    "cases_total": 1,
+    "wrong_actions": 0,
+    "correct_escalations": 0,
+    "missed_escalations": 0,
+    "false_escalations": 0,
+    "tool_calls": 9,
+    "input_tokens": 39400,
+    "output_tokens": 1430,
+    "model_calls": 19
+  },
+  "file": "/Users/abdullamaghrabi/Desktop/Agentic-Onboarding-System/backend/eval/results/full-20261031-095754.json"
+}

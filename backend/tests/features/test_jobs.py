@@ -1,9 +1,6 @@
 def test_company_creates_several_jobs(client, company_a):
-    template = client.post("/templates", json={"name": "T", "steps": []}, headers=company_a).json()
     for title in ["Driver", "Accountant"]:
-        response = client.post(
-            "/jobs", json={"title": title, "template_id": template["id"]}, headers=company_a
-        )
+        response = client.post("/jobs", json={"title": title}, headers=company_a)
         assert response.status_code == 201
     assert len(client.get("/jobs", headers=company_a).json()) == 2
 
@@ -22,19 +19,10 @@ def test_other_company_cannot_see_or_update_job(client, company_a, company_b):
     assert client.get("/jobs", headers=company_b).json() == []
 
 
-def test_cannot_use_another_companys_template(client, company_a, company_b):
-    template_id = client.post("/templates", json={"name": "T", "steps": []}, headers=company_a).json()["id"]
-    created = client.post("/jobs", json={"title": "J", "template_id": template_id}, headers=company_b)
-    assert created.status_code == 404
-
-    own_job = client.post("/jobs", json={"title": "J"}, headers=company_b).json()["id"]
-    updated = client.put(f"/jobs/{own_job}", json={"title": "J", "template_id": template_id}, headers=company_b)
-    assert updated.status_code == 404
-
-
-def test_job_status_defaults_to_draft_and_rejects_unknown(client, company_a):
+def test_job_status_defaults_to_onboarding_and_rejects_unknown(client, company_a):
     created = client.post("/jobs", json={"title": "Driver"}, headers=company_a).json()
-    assert created["status"] == "draft"
+    assert created["status"] == "onboarding"
+    assert client.post("/jobs", json={"title": "X", "status": "draft"}, headers=company_a).status_code == 422
 
     closed = client.post("/jobs", json={"title": "Old", "status": "closed"}, headers=company_a)
     assert closed.json()["status"] == "closed"

@@ -20,11 +20,13 @@ export function DocumentsEditor({ jobId }: { jobId: number }) {
     <div className="list-editor">
       {documents.length === 0 && <span className="muted">{t("documents.empty")}</span>}
       {documents.map((document) => (
-        <div key={document.id} className="list-item">
-          <button type="button" className="link-button list-item-name" onClick={() => download(document)}>
-            {document.filename}
-          </button>
-          <button type="button" className="icon-button" onClick={() => remove(document)}>×</button>
+        <div key={document.id} className="document-item">
+          <div className="document-head">
+            <button type="button" className="link-button list-item-name" onClick={() => download(document)}>
+              {document.filename}
+            </button>
+            <button type="button" className="icon-button" onClick={() => remove(document)}>×</button>
+          </div>
         </div>
       ))}
       <input ref={fileInput} type="file" multiple hidden onChange={onFilesChosen} />

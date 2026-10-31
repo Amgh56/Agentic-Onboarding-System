@@ -10,6 +10,7 @@ VALID = {
     "MODEL_STRONG": "strong-model",
     "MODEL_FAST": "fast-model",
     "OPENAI_API_KEY": "sk-test",
+    "APP_BASE_URL": "http://localhost:8000",
 }
 
 
@@ -18,6 +19,7 @@ def test_valid_env_loads():
     assert settings.model_strong == "strong-model"
     assert settings.model_fast == "fast-model"
     assert settings.openai_api_key == "sk-test"
+    assert settings.app_base_url == "http://localhost:8000"
 
 
 def test_missing_values_are_all_named_in_the_error():
